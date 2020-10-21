@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
-
 class SuperMastermind(ABC):
 
     '''Abstract method for use with setting the gametype such as which mastermind'''
@@ -32,4 +31,35 @@ class SuperMastermind(ABC):
     '''Abstract method to check the win conditions and whether they are true'''
     @abstractmethod
     def checkWinConditions(self):
+        pass
+
+'''Class to determine whether player is human or not'''
+class Player(self, ishuman):
+    self.ishuman = ishuman
+
+'''Method to place a peg in a position'''
+    def placePeg(pegPosition):
+        pass
+
+'''Method to choose the colour of the peg'''
+    def choosePegColour(string):
+        pass
+
+'''Method for choosing the secret code that is meant to be guessed'''
+class SecretCode(shieldCode):
+    self.shieldCode = shieldCode
+
+    def setShieldCode(shieldCode):
+        pass
+
+    def generateShieldCode(shieldCode):
+        pass
+
+    def setColour(colour):
+        pass
+
+    def revealCode(shieldCode):
+        pass
+
+    def checkSecretLength(secretLength):
         pass
