@@ -2,6 +2,12 @@ from abc import ABC, abstractmethod
 
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
 class SuperMastermind(ABC):
+    def __init__(self, rows, rounds, secretCode, winConditions, secretLength):
+        self.rows = rows
+        self.rounds = rounds
+        self.secretCode = secretCode
+        self.winConditions = winConditions
+        self.secretLength = secretLength
 
     '''Abstract method for use with setting the gametype such as which mastermind'''
     @abstractmethod
@@ -34,8 +40,9 @@ class SuperMastermind(ABC):
         pass
 
 '''Class to determine whether player is human or not'''
-class Player(self, ishuman):
-    self.ishuman = ishuman
+class Player:
+    def __init__(self, ishuman):
+        self.ishuman = False
 
 '''Method to place a peg in a position'''
     def placePeg(pegPosition):
@@ -46,8 +53,10 @@ class Player(self, ishuman):
         pass
 
 '''Method for choosing the secret code that is meant to be guessed'''
-class SecretCode(shieldCode):
-    self.shieldCode = shieldCode
+class SecretCode:
+
+    def __init__ (self, shieldCode):
+        self.shieldCode = shieldCode
 
     def setShieldCode(shieldCode):
         pass
@@ -62,4 +71,15 @@ class SecretCode(shieldCode):
         pass
 
     def checkSecretLength(secretLength):
+        pass
+
+class DecodingBoard:
+
+    def __init__(self, shield, guessHoles, feedbackHoles, shieldHoles):
+        self.shield = shield
+        self.guessHoles = guessHoles
+        self.feedbackHoles = feedbackHoles
+        self.shieldHoles = shieldHoles
+
+    def placePeg(peg):
         pass
