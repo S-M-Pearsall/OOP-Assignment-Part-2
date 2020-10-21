@@ -39,6 +39,13 @@ class SuperMastermind(ABC):
     def checkWinConditions(self):
         pass
 
+class Mastermind(SuperMastermind):
+    pass
+
+class Mastermind44(SuperMastermind):
+    pass
+
+
 '''Class to determine whether player is human or not'''
 class Player:
     def __init__(self, ishuman):
@@ -83,3 +90,31 @@ class DecodingBoard:
 
     def placePeg(peg):
         pass
+
+class Peg:
+    def __init__(self, colour, pegType):
+        self.colour = colour
+        self.pegType = pegType
+    
+class Rows: 
+    def __init__(self, holes, holeNumber, rowNumber):
+        self.holes = holes
+        self.holeNumber = holeNumber
+        self.rowNumber = rowNumber
+
+    def getHoleNumber(holeNumber):
+        pass
+
+    def getRowNumber(rowNumber):
+        pass
+
+
+
+
+
+
+
+
+print("Welcome to Mastermind!")
+print("Developed by Scott Pearsall")
+print("COMP 1046 Object Oriented Programming")
