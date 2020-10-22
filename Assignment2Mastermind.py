@@ -83,12 +83,26 @@ class SecretCode:
     def __init__ (self, shieldCode):
         self.shieldCode = shieldCode
 
+    '''Method for player setting shieldcode'''
     def setShieldCode(shieldCode):
         pass
 
+    '''Method for AI generating shieldcode'''
     def generateShieldCode(shieldCode):
-        pass
+        asciiNumberCode = string.ascii_letters
+        shieldCode = ""
+        index = 0
 
+        while index < 4:
+            holdingShieldCode = random.choice(asciiNumberCode)
+            while holdingShieldCode != "R" and holdingShieldCode != "L" and holdingShieldCode != "G" and holdingShieldCode != "Y" and holdingShieldCode != "W" and holdingShieldCode != "B"
+                holdingShieldCode = random.choice(asciiNumberCode) 
+
+            shieldCode = shieldCode + holdingShieldCode
+            index = index + 1
+            holdingShieldCode = ""
+
+        
     def setColour(colour):
         pass
 
@@ -109,7 +123,7 @@ class DecodingBoard:
     '''Method for player to make a guess on what they think the code is'''
     def playerGuess():
         pass
-    
+
     '''Feedback Method to provide feedback to player'''
     def feedback(self, pegCode):
         index = 1
