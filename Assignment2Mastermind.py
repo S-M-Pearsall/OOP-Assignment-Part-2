@@ -1,4 +1,20 @@
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod import string import random
+
+''' Class to run the main menu where player chooses their gamemode'''
+class MainMenu:
+
+    '''Method of MainMenu class where player chooses their gamemode'''
+    def play(self, gametype):
+        print("Welcome to Mastermind!")
+        print("Developed by Scott Pearsall")
+        print("COMP 1046 Object Oriented Programming")
+
+        print("Select which game you want to play:")
+        print("    (A) Original Mastermind for 2 Players")
+        print("    (B) Original Mastermind for 1 Player")
+        print("    (C) Mastermind44 for 4 players")
+        gametype = input("*Enter A, B, or C to continue*")
+
 
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
 class SuperMastermind(ABC):
@@ -39,9 +55,11 @@ class SuperMastermind(ABC):
     def checkWinConditions(self):
         pass
 
+'''Inherited class for basic Mastermind gametype'''
 class Mastermind(SuperMastermind):
     pass
 
+'''Inherited class for Mastermind44 gametype'''
 class Mastermind44(SuperMastermind):
     pass
 
@@ -80,41 +98,30 @@ class SecretCode:
     def checkSecretLength(secretLength):
         pass
 
+'''Board to make guesses and give feedback'''
 class DecodingBoard:
 
-    def __init__(self, shield, guessHoles, feedbackHoles, shieldHoles):
-        self.shield = shield
-        self.guessHoles = guessHoles
-        self.feedbackHoles = feedbackHoles
-        self.shieldHoles = shieldHoles
+    def __init__(self, shieldCode, feedback, pegCode):
+        self.shieldCode = shieldCode
+        self.feedback = feedback
+        self.pegCode = pegCode
 
-    def placePeg(peg):
+    '''Method for player to make a guess on what they think the code is'''
+    def playerGuess():
         pass
-
-class Peg:
-    def __init__(self, colour, pegType):
-        self.colour = colour
-        self.pegType = pegType
     
-class Rows: 
-    def __init__(self, holes, holeNumber, rowNumber):
-        self.holes = holes
-        self.holeNumber = holeNumber
-        self.rowNumber = rowNumber
+    '''Feedback Method to provide feedback to player'''
+    def feedback(self, pegCode):
+        index = 1
 
-    def getHoleNumber(holeNumber):
-        pass
-
-    def getRowNumber(rowNumber):
-        pass
-
-
+        for x in pegCode:
+            if x == shieldcode(x):
+                feedback == feedback + "B"
+            elif x is in shieldCode and x != shieldCode(x):
+                feedback == feedback + "W"
+        print("Feedback on Attempt #", index)
+        index = index + 1
 
 
 
 
-
-
-print("Welcome to Mastermind!")
-print("Developed by Scott Pearsall")
-print("COMP 1046 Object Oriented Programming")
