@@ -1,4 +1,5 @@
-from abc import ABC, abstractmethod import string import random
+from abc import ABC, abstractmethod 
+import random
 
 ''' Class to run the main menu where player chooses their gamemode'''
 class MainMenu:
@@ -29,11 +30,14 @@ class MainMenu:
         elif gametype == "c":
             Mastermind44()
 
+        getName()
+
+        generateShieldCode()
+
 
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
 class SuperMastermind(ABC):
     def __init__(self, rows, rounds, secretCode, winConditions, secretLength):
-        self.rows = rows
         self.rounds = rounds
         self.secretCode = secretCode
         self.winConditions = winConditions
@@ -58,16 +62,6 @@ class SuperMastermind(ABC):
     def provideFeedback(self):
         pass
 
-    '''Abstract method for defining the number of rows to be used'''
-    @abstractmethod
-    def numberofRows(self):
-        pass
-
-    '''Abstract method for defining the amount of rounds to be used'''
-    @abstractmethod
-    def amountOfRounds(self):
-        pass
-
     '''Abstract method to check the win conditions and whether they are true'''
     @abstractmethod
     def checkWinConditions(self):
@@ -79,6 +73,10 @@ class MastermindOnePlayer(SuperMastermind):
 
 '''Inherited class for basic two player Mastermind gametype'''
 class MastermindTwoPlayer(SuperMastermind):
+    def __init__(self, rounds, secretCode)
+        super().__init__(rounds, secretCode)
+        self.rounds = 12
+        self.secretCode = secretCode
 
     '''Method to get the name of the current players'''
     def getName():
@@ -96,13 +94,51 @@ class MastermindTwoPlayer(SuperMastermind):
         print("the code twice. No character is shown on the screen so Supermind cannot see it.")
         secretCode = input("Enter the code now:")
         confirmSecretCode = input("Enter the code again:")
-
+        #REMEMBER TO MAKE SURE SECRET CODE CANNOT BE MADE IN A WRONG WAY
         while confirmSecretCode != secretCode:
             print("Error, please re-enter the code twice")
                 secretCode = input("Enter the code now:")
                 confirmSecretCode = input("Enter the code again:")
-                
+
         print("The code was stored.")
+        secretCodeList = list(secretCode)
+
+    '''Method o take a players guesses and give them feedback'''
+    def guessAndFeedback():
+        index = 0
+        attemptCounter = 1
+        winCondition = False
+        print("Welcome ", player2, ". You can now start to play by guessing the code.")
+        print("Enter an attempt by providing four characters and press Enter")
+
+        ''' While the index is less than 12 and the win condition is false
+        Go through each letter in the guessed code, compare it to the secret code.
+        if letter is same as secret code letter in same position, add B to feedback
+        if letter is not in the same position, but still exists in the secret code
+        W is added to feedback'''
+        while index > rounds and winCondition == False:
+            playerAttempt = input("Attempt #", attempt, ":")
+            for x in playerAttempt:
+                
+                if x == secretCodeList(index):
+                    feedback = feedback + "B "
+
+                elif x != SecretCodeList(index) and x in secretCodeList:
+                    feedback = feedback + "W "
+
+                else:
+                    feedback = feedback + " "
+
+            print("Feedback on attempt #", attemptCounter, ":", feedback)
+
+            index = index + 1
+            attemptCounter = attemptCounter + 1
+                
+            if playerAttempt == SecretCode:
+                winCondition = True
+                print("Congratulations! You broke the code in ", attemptCounter, " attempts.")
+
+
 
 '''Inherited class for Mastermind44 gametype'''
 class Mastermind44(SuperMastermind):
