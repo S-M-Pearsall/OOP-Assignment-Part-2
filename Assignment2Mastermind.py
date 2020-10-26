@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod 
-import random
+import random 
+import string
 
 ''' Class to run the main menu where player chooses their gamemode'''
 class MainMenu:
-
+    def __init__(self, playing):
+        self.playing = True
     '''Method of MainMenu class where player chooses their gamemode'''
-    def play(self, gametype):
+    def play(self, playing):
         while playing == True:
             print("Welcome to Mastermind!")
             print("Developed by Scott Pearsall")
@@ -35,14 +37,16 @@ class MainMenu:
 
             elif gametype == "b":
 
-                MastermindOnePlayer.getName()
+                #MastermindOnePlayer.getName()
 
-                MastermindOnePlayer.generateShieldCode()
+                #MastermindOnePlayer.generateShieldCode()
 
-                MastermindOnePlayer.guessAndFeedback()
+                #MastermindOnePlayer.guessAndFeedback()
+                pass
 
             elif gametype == "c":
-                Mastermind44()
+                #Mastermind44()
+                pass
             
             print("What would you like to do?")
             willYouPlay = input("(p)lay the game again\n(q)uit")
@@ -50,7 +54,7 @@ class MainMenu:
                 playing = False
             elif willYouPlay == "p":
                 playing = True
-                
+
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
 class SuperMastermind(ABC):
     def __init__(self, rows, rounds, secretCode, winConditions, secretLength):
@@ -89,7 +93,7 @@ class MastermindOnePlayer(SuperMastermind):
 
 '''Inherited class for basic two player Mastermind gametype'''
 class MastermindTwoPlayer(SuperMastermind):
-    def __init__(self, rounds, secretCode)
+    def __init__(self, rounds, secretCode):
         super().__init__(rounds, secretCode)
         self.rounds = 12
         self.secretCode = secretCode
@@ -113,8 +117,8 @@ class MastermindTwoPlayer(SuperMastermind):
         #REMEMBER TO MAKE SURE SECRET CODE CANNOT BE MADE IN A WRONG WAY
         while confirmSecretCode != secretCode:
             print("Error, please re-enter the code twice")
-                secretCode = input("Enter the code now:")
-                confirmSecretCode = input("Enter the code again:")
+            secretCode = input("Enter the code now:")
+            confirmSecretCode = input("Enter the code again:")
 
         print("The code was stored.")
         secretCodeList = list(secretCode)
@@ -175,18 +179,18 @@ class SecretCode:
         self.shieldCode = shieldCode
 
     '''Method for player setting shieldcode'''
-    def setShieldCode(shieldCode):
+    def setShieldCode(self, shieldCode):
         pass
 
     '''Method for AI generating shieldcode'''
-    def generateShieldCode(shieldCode):
+    def generateShieldCode(self, shieldCode):
         asciiNumberCode = string.ascii_letters
         shieldCode = ""
         index = 0
 
         while index < 4:
             holdingShieldCode = random.choice(asciiNumberCode)
-            while holdingShieldCode != "R" and holdingShieldCode != "L" and holdingShieldCode != "G" and holdingShieldCode != "Y" and holdingShieldCode != "W" and holdingShieldCode != "B"
+            while holdingShieldCode != "R" and holdingShieldCode != "L" and holdingShieldCode != "G" and holdingShieldCode != "Y" and holdingShieldCode != "W" and holdingShieldCode != "B":
                 holdingShieldCode = random.choice(asciiNumberCode) 
 
             shieldCode = shieldCode + holdingShieldCode
@@ -194,38 +198,15 @@ class SecretCode:
             holdingShieldCode = ""
 
         
-    def setColour(colour):
+    def setColour(self, colour):
         pass
 
-    def revealCode(shieldCode):
+    def revealCode(self, shieldCode):
         pass
 
-    def checkSecretLength(secretLength):
+    def checkSecretLength(self, secretLength):
         pass
 
-'''Board to make guesses and give feedback'''
-class DecodingBoard:
-
-    def __init__(self, shieldCode, feedback, pegCode):
-        self.shieldCode = shieldCode
-        self.feedback = feedback
-        self.pegCode = pegCode
-
-    '''Method for player to make a guess on what they think the code is'''
-    def playerGuess():
-        pass
-
-    '''Feedback Method to provide feedback to player'''
-    def feedback(self, pegCode):
-        index = 1
-
-        for x in pegCode:
-            if x == shieldcode(x):
-                feedback == feedback + "B"
-            elif x is in shieldCode and x != shieldCode(x):
-                feedback == feedback + "W"
-        print("Feedback on Attempt #", index)
-        index = index + 1
 
 
 
