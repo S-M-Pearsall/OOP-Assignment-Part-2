@@ -6,35 +6,51 @@ class MainMenu:
 
     '''Method of MainMenu class where player chooses their gamemode'''
     def play(self, gametype):
-        print("Welcome to Mastermind!")
-        print("Developed by Scott Pearsall")
-        print("COMP 1046 Object Oriented Programming")
+        while playing == True:
+            print("Welcome to Mastermind!")
+            print("Developed by Scott Pearsall")
+            print("COMP 1046 Object Oriented Programming")
 
-        print("Select which game you want to play:")
-        print("    (A) Original Mastermind for 2 Players")
-        print("    (B) Original Mastermind for 1 Player")
-        print("    (C) Mastermind44 for 4 players")
-        gametype = input("*Enter A, B, or C to continue*")
+            print("Select which game you want to play:")
+            print("    (A) Original Mastermind for 2 Players")
+            print("    (B) Original Mastermind for 1 Player")
+            print("    (C) Mastermind44 for 4 players")
+            gametype = input("*Enter A, B, or C to continue*")
 
-        '''Takes the input and compares it. If it is a valid input it launches that gametype.
-        Otherwise it tells the user that it is invalid and tells them to redo it.'''
-        while gametype != "a" or gametype != "b" or gametype != "c":
-            print("Error, invalid input, please retry, you can either choose A, B or C")
+            '''Takes the input and compares it. If it is a valid input it launches that gametype.
+            Otherwise it tells the user that it is invalid and tells them to redo it.'''
+            while gametype != "a" or gametype != "b" or gametype != "c":
+                print("Error, invalid input, please retry, you can either choose A, B or C")
         
-        if gametype == "a":
-            MastermindTwoPlayer()
 
-        elif gametype == "b":
-            MastermindOnePlayer()
+            ''' These if statements check what gametype is selected and proceed
+            to play out the game that has been selected'''
+            if gametype == "a":
 
-        elif gametype == "c":
-            Mastermind44()
+                MastermindTwoPlayer.getName()
 
-        getName()
+                MastermindTwoPlayer.generateShieldCode()
 
-        generateShieldCode()
+                MastermindTwoPlayer.guessAndFeedback()
 
+            elif gametype == "b":
 
+                MastermindOnePlayer.getName()
+
+                MastermindOnePlayer.generateShieldCode()
+
+                MastermindOnePlayer.guessAndFeedback()
+
+            elif gametype == "c":
+                Mastermind44()
+            
+            print("What would you like to do?")
+            willYouPlay = input("(p)lay the game again\n(q)uit")
+            if willYouPlay == "q":
+                playing = False
+            elif willYouPlay == "p":
+                playing = True
+                
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
 class SuperMastermind(ABC):
     def __init__(self, rows, rounds, secretCode, winConditions, secretLength):
@@ -137,6 +153,8 @@ class MastermindTwoPlayer(SuperMastermind):
             if playerAttempt == SecretCode:
                 winCondition = True
                 print("Congratulations! You broke the code in ", attemptCounter, " attempts.")
+            else:
+                print("You have failed to guess the secret code correctly. The mastermind wins.")
 
 
 
