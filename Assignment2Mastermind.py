@@ -15,6 +15,20 @@ class MainMenu:
         print("    (C) Mastermind44 for 4 players")
         gametype = input("*Enter A, B, or C to continue*")
 
+        '''Takes the input and compares it. If it is a valid input it launches that gametype.
+        Otherwise it tells the user that it is invalid and tells them to redo it.'''
+        while gametype != "a" or gametype != "b" or gametype != "c":
+            print("Error, invalid input, please retry, you can either choose A, B or C")
+        
+        if gametype == "a":
+            MastermindTwoPlayer()
+
+        elif gametype == "b":
+            MastermindOnePlayer()
+
+        elif gametype == "c":
+            Mastermind44()
+
 
 '''Abstract class that contains the ability for future masterminds to spawn off of it through inheritance'''
 class SuperMastermind(ABC):
@@ -24,6 +38,10 @@ class SuperMastermind(ABC):
         self.secretCode = secretCode
         self.winConditions = winConditions
         self.secretLength = secretLength
+
+    @abstractmethod
+    def getName(self):
+        pass
 
     '''Abstract method for use with setting the gametype such as which mastermind'''
     @abstractmethod
@@ -55,9 +73,36 @@ class SuperMastermind(ABC):
     def checkWinConditions(self):
         pass
 
-'''Inherited class for basic Mastermind gametype'''
-class Mastermind(SuperMastermind):
+'''Inherited class for basic one player Mastermind gametype'''
+class MastermindOnePlayer(SuperMastermind):
     pass
+
+'''Inherited class for basic two player Mastermind gametype'''
+class MastermindTwoPlayer(SuperMastermind):
+
+    '''Method to get the name of the current players'''
+    def getName():
+        player1 = input("Player 1: What is your name?")
+
+        player2 = input("Player 2: what is your name?")
+
+    '''Method to generate the secret shield code'''
+    def generateShieldCode():
+
+        print("Welcome ", player1, ", you need to create a code that consists of four pegs.")
+        print("Each peg can be of the colour (R)ed, B(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack.")
+        print("Specify the colour by specifying four characters where each character indicates a colour")
+        print("as above. For example, WWRG represents the code Whie-White-Red-Green. You need to enter")
+        print("the code twice. No character is shown on the screen so Supermind cannot see it.")
+        secretCode = input("Enter the code now:")
+        confirmSecretCode = input("Enter the code again:")
+
+        while confirmSecretCode != secretCode:
+            print("Error, please re-enter the code twice")
+                secretCode = input("Enter the code now:")
+                confirmSecretCode = input("Enter the code again:")
+                
+        print("The code was stored.")
 
 '''Inherited class for Mastermind44 gametype'''
 class Mastermind44(SuperMastermind):
@@ -68,14 +113,6 @@ class Mastermind44(SuperMastermind):
 class Player:
     def __init__(self, ishuman):
         self.ishuman = False
-
-'''Method to place a peg in a position'''
-    def placePeg(pegPosition):
-        pass
-
-'''Method to choose the colour of the peg'''
-    def choosePegColour(string):
-        pass
 
 '''Method for choosing the secret code that is meant to be guessed'''
 class SecretCode:
