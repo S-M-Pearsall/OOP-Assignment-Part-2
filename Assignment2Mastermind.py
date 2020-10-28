@@ -93,19 +93,20 @@ class MastermindOnePlayer(SuperMastermind):
 
 '''Inherited class for basic two player Mastermind gametype'''
 class MastermindTwoPlayer(SuperMastermind):
-    def __init__(self, rounds, secretCode):
-        super().__init__(rounds, secretCode)
+    def __init__(self, rounds, secretCode, player1):
+        super().__init__(rounds, secretCode, player1)
         self.rounds = 12
         self.secretCode = secretCode
+        self.player1 = player1
 
     '''Method to get the name of the current players'''
-    def getName():
+    def getName(self):
         player1 = input("Player 1: What is your name?")
 
         player2 = input("Player 2: what is your name?")
 
     '''Method to generate the secret shield code'''
-    def generateShieldCode():
+    def generateShieldCode(self):
 
         print("Welcome ", player1, ", you need to create a code that consists of four pegs.")
         print("Each peg can be of the colour (R)ed, B(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack.")
@@ -124,10 +125,12 @@ class MastermindTwoPlayer(SuperMastermind):
         secretCodeList = list(secretCode)
 
     '''Method o take a players guesses and give them feedback'''
-    def guessAndFeedback():
+    def guessAndFeedback(self):
         index = 0
         attemptCounter = 1
         winCondition = False
+        blackFeedback = []
+        whiteFeedback = []
         print("Welcome ", player2, ". You can now start to play by guessing the code.")
         print("Enter an attempt by providing four characters and press Enter")
 
@@ -138,16 +141,16 @@ class MastermindTwoPlayer(SuperMastermind):
         W is added to feedback'''
         while index > rounds and winCondition == False:
             playerAttempt = input("Attempt #", attempt, ":")
-            for x in playerAttempt:
+            playerAttemptList = list(playerAttempt)
+            for x in playerAttemptList:
                 
                 if x == secretCodeList(index):
-                    feedback = feedback + "B "
+                    blackFeedback = blackFeedback + "B"
 
-                elif x != SecretCodeList(index) and x in secretCodeList:
-                    feedback = feedback + "W "
-
-                else:
-                    feedback = feedback + " "
+                if x in secretCodeList:
+                    whiteFeedback = whiteFeedback + "W"
+            for x in blackFeedback:
+                whiteFeedback.remove(0)
 
             print("Feedback on attempt #", attemptCounter, ":", feedback)
 
