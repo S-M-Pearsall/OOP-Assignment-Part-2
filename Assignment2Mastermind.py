@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod 
 import random 
 import string
+import unittest
 
 ''' Class to run the main menu where player chooses their gamemode'''
 class MainMenu:
@@ -214,7 +215,7 @@ class MastermindOnePlayer(supermastermind):
         secretCodeList = []
         index = 0
 
-        while index < 4:
+        while index < 5:
             holdingShieldCode = random.choice(asciiNumberCode)
             while holdingShieldCode != "r" and holdingShieldCode != "l" and holdingShieldCode != "g" and holdingShieldCode != "y" and holdingShieldCode != "w" and holdingShieldCode != "b":
                 holdingShieldCode = ""
@@ -224,9 +225,10 @@ class MastermindOnePlayer(supermastermind):
             index = index + 1
             holdingShieldCode = ""
         
-        print(secretCodeList)
-        
         MastermindOnePlayer.guessAndFeedback(self, self.player1, secretCodeList)
+
+    def test_code_generation_length(self, secretCodeList):
+        assert secretCodeList == list
 
     def guessAndFeedback(self, player1, secretCodeList):
         rounds = 12
