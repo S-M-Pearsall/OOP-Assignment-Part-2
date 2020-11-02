@@ -5,10 +5,10 @@ import string
 from Assignment2Mastermind import MastermindOnePlayer
 from Assignment2Mastermind import MastermindTwoPlayer
 
-class Testing(unittest.TestCase):
-    
-    def test_computer_code_generation(self):
-        self.assertEqual(len(secretCodeList), 4)
+'''Class to test the generation of a shieldcode'''
+class TestingMastermind(unittest.TestCase):
 
+    def __init__(self):
+        self.mop = MastermindOnePlayer('rgwb', ['r, g, w, b'])
 
 unittest.main()

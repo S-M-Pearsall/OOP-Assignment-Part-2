@@ -195,7 +195,7 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
         indexRounds = 0
         attemptCounter = 1
-            
+        print(secretCodeList)    
 '''Inherited class for singleplayer original Mastermind against computer'''
 class MastermindOnePlayer(supermastermind, codeShield):
     def __init__(self, secretCode, secretCodeList):
