@@ -1,19 +1,8 @@
-from Assignment2Mastermind import MastermindOnePlayer as mop
+from Assignment2Mastermind import MastermindOnePlayer
 #from Assignment2Mastermind import MastermindTwoPlayer
-import unittest
-class TestMastermind(unittest.TestCase):
+import pytest
 
-    def test_MastermindPlayerOne(self):
-        firstPerson = "Jesse"
-        testcode = ['r, g, w, b']
-
-        self.assertEqual(firstPerson.getName, "Jesse")
-        self.assertEqual(testcode, ['r, g, w, b'])
-
-
-
-
-
-
-
-unittest.main()
+def test_shield_code():
+    m = MastermindOnePlayer()
+    m.generateShieldCode()
+    assert len(m.secretCodeList) == 4
