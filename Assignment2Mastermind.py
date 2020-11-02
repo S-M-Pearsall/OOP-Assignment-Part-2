@@ -49,10 +49,20 @@ class MainMenu:
             MainMenu.play(self)
         
             
-            
+class supermastermind(ABC):
+    @abstractmethod
+    def getName(self):
+        pass
+
+    @abstractmethod
+    def guessAndFeedback(self):
+        pass
+
+class codeShield:
+    pass
 
 '''Inherited class for basic two player Mastermind gametype'''
-class MastermindTwoPlayer:
+class MastermindTwoPlayer(supermastermind):
     def __init__(self, secretCode, secretCodeList):
         self.secretCode = secretCode
         self.secretCodeList = []
@@ -178,8 +188,8 @@ class MastermindTwoPlayer:
         indexRounds = 0
         attemptCounter = 1
             
-
-class MastermindOnePlayer:
+'''Inherited class for singleplayer original Mastermind against computer'''
+class MastermindOnePlayer(supermastermind):
     def __init__(self, secretCode, secretCodeList):
         self.secretCode = secretCode
         self.secretCodeList = []
