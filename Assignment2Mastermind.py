@@ -48,18 +48,25 @@ class MainMenu:
         if willYouPlay == "p":
             MainMenu.play(self)
         
-            
+
+'''An abstract class for new gametypes to inherit from'''            
 class supermastermind(ABC):
+    '''An abstract method for gametypes to inherit from so they can set names'''
     @abstractmethod
     def getName(self):
         pass
-
+    '''An abstract method for gametypes to inherit from where they can do their guesses and feedback'''
     @abstractmethod
     def guessAndFeedback(self):
         pass
 
-class codeShield:
-    pass
+'''Abstract class for gamemodes to inherit shield code generation from'''
+class codeShield(ABC):
+
+    '''Abstract method for shieldcode generation to be inherited'''
+    @abstractmethod
+    def generateShieldCode(self):
+        pass
 
 '''Inherited class for basic two player Mastermind gametype'''
 class MastermindTwoPlayer(supermastermind):
@@ -73,11 +80,11 @@ class MastermindTwoPlayer(supermastermind):
 
         self.player2 = input("Player 2: what is your name?")
 
-        MastermindTwoPlayer.generateShieldCode(self)
+        MastermindTwoPlayer.generateShieldCode(self, self.player1)
 
 
     '''Method to generate the secret shield code'''
-    def generateShieldCode(self):
+    def generateShieldCode(self, player1):
 
         print("Welcome ", self.player1, ", you need to create a code that consists of four pegs.")
         print("Each peg can be of the colour (R)ed, B(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack.")
