@@ -70,7 +70,7 @@ class codeShield(ABC):
         pass
 
 '''Inherited class for basic two player Mastermind gametype'''
-class MastermindTwoPlayer(supermastermind):
+class MastermindTwoPlayer(supermastermind, codeShield):
     def __init__(self, secretCode, secretCodeList):
         self.secretCode = secretCode
         self.secretCodeList = []
@@ -197,7 +197,7 @@ class MastermindTwoPlayer(supermastermind):
         attemptCounter = 1
             
 '''Inherited class for singleplayer original Mastermind against computer'''
-class MastermindOnePlayer(supermastermind):
+class MastermindOnePlayer(supermastermind, codeShield):
     def __init__(self, secretCode, secretCodeList):
         self.secretCode = secretCode
         self.secretCodeList = []
@@ -303,48 +303,6 @@ class MastermindOnePlayer(supermastermind):
 
         indexRounds = 0
         attemptCounter = 1
-
-
-
-'''Class to determine whether player is human or not'''
-class Player:
-    def __init__(self, ishuman):
-        self.ishuman = False
-
-'''Method for choosing the secret code that is meant to be guessed'''
-class SecretCode:
-
-    def __init__ (self, shieldCode):
-        self.shieldCode = shieldCode
-
-    '''Method for player setting shieldcode'''
-    def setShieldCode(self, shieldCode):
-        pass
-
-    '''Method for AI generating shieldcode'''
-    def generateShieldCode(self, shieldCode):
-        asciiNumberCode = string.ascii_letters
-        shieldCode = ""
-        index = 0
-
-        while index < 4:
-            holdingShieldCode = random.choice(asciiNumberCode)
-            while holdingShieldCode != "R" and holdingShieldCode != "L" and holdingShieldCode != "G" and holdingShieldCode != "Y" and holdingShieldCode != "W" and holdingShieldCode != "B":
-                holdingShieldCode = random.choice(asciiNumberCode) 
-
-            shieldCode = shieldCode + holdingShieldCode
-            index = index + 1
-            holdingShieldCode = ""
-
-        
-    def setColour(self, colour):
-        pass
-
-    def revealCode(self, shieldCode):
-        pass
-
-    def checkSecretLength(self, secretLength):
-        pass
 
 
 m = MainMenu()
