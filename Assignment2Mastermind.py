@@ -198,8 +198,7 @@ class MastermindTwoPlayer(supermastermind, codeShield):
         print(secretCodeList)    
 '''Inherited class for singleplayer original Mastermind against computer'''
 class MastermindOnePlayer(supermastermind, codeShield):
-    def __init__(self, secretCode, secretCodeList):
-        self.secretCode = secretCode
+    def __init__(self, secretCodeList):
         self.secretCodeList = []
 
     '''Method to get the name of the current players'''
@@ -226,9 +225,6 @@ class MastermindOnePlayer(supermastermind, codeShield):
             holdingShieldCode = ""
         
         MastermindOnePlayer.guessAndFeedback(self, self.player1, secretCodeList)
-
-    def test_code_generation_length(self, secretCodeList):
-        assert secretCodeList == list
 
     def guessAndFeedback(self, player1, secretCodeList):
         rounds = 12
@@ -303,7 +299,6 @@ class MastermindOnePlayer(supermastermind, codeShield):
 
         indexRounds = 0
         attemptCounter = 1
-
 
 m = MainMenu()
 
