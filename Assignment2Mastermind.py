@@ -215,7 +215,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
         secretCodeList = []
         index = 0
 
-        while index < 5:
+        while index < 4:
             holdingShieldCode = random.choice(asciiNumberCode)
             while holdingShieldCode != "r" and holdingShieldCode != "l" and holdingShieldCode != "g" and holdingShieldCode != "y" and holdingShieldCode != "w" and holdingShieldCode != "b":
                 holdingShieldCode = ""
