@@ -136,7 +136,7 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
         MastermindTwoPlayer.guess(self, self.player2, secretCodeList, indexRounds)
 
-    '''Method o take a players guesses and give them feedback'''
+    '''Method to take a players guesses and give them feedback'''
 
     def guess(self, player2, secretCodeList, indexRounds):
         feedback = []
@@ -216,13 +216,11 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
 
 '''Inherited class for singleplayer original Mastermind against computer'''
-
-
 class MastermindOnePlayer(supermastermind, codeShield):
-    def __init__(self, player1, secretCodeList, winCondition):
-        self.player1 = player1
+    def __init__(self, secretCode, secretCodeList, indexRounds):
+        self.secretCode = secretCode
         self.secretCodeList = []
-        self.winCondition = False
+        self.indexRounds = indexRounds
 
     '''Method to get the name of the current players'''
 
@@ -248,15 +246,17 @@ class MastermindOnePlayer(supermastermind, codeShield):
             self.secretCodeList.append(holdingShieldCode)
             index = index + 1
             holdingShieldCode = ""
-
-        MastermindOnePlayer.guess(
-            self, self.player1, self.secretCodeList, self.winCondition)
-
-    def guess(self, player1, secretCodeList, winCondition):
-        rounds = 12
+        print(self.secretCodeList)
         indexRounds = 0
-        print("Welcome ", player1,
-              ". You can now start to play by guessing the code.")
+        MastermindOnePlayer.guess(self, self.player1, self.secretCodeList, indexRounds)
+
+    '''Method o take a players guesses and give them feedback'''
+
+    def guess(self, player1, secretCodeList, indexRounds):
+        feedback = []
+        rounds = 12
+        attemptCounter = 1
+        print("Welcome ", player1,". You can now start to play by guessing the code.")
         print("Enter an attempt by providing four characters and press Enter")
 
         ''' While the index is less than 12 and the win condition is false
@@ -264,7 +264,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
         if letter is same as secret code letter in same position, add B to feedback
         if letter exists in the guess then it adds a white peg before then removing x number
         of white pegs determined by the number of black pegs'''
-        while indexRounds < rounds and winCondition == False:
+        while indexRounds < rounds:
             playerAttempt = input("Give me Input")
 
             '''Checks validity of the guess length'''
@@ -278,12 +278,25 @@ class MastermindOnePlayer(supermastermind, codeShield):
                 if x not in ['r', 'l', 'g', 'y', 'w', 'b']:
                     print("Characters can only be R, L, G, Y, W or B")
                     playerAttempt = input("Give me Input")
+            feedback = MastermindTwoPlayer.guessFeedback(self, playerAttempt, secretCodeList, indexRounds, attemptCounter)
 
-    def feedback(self, playerAttempt, secretCodeList, indexRounds):
+            '''Checks if win conditions are valid'''
+            if feedback == ['B', 'B', 'B', 'B']:
+                indexRounds = 12
+                print("Congratulations! You broke the code in ",
+                      attemptCounter, " attempts.")
+
+            elif feedback != ['B', 'B', 'B', 'B'] and attemptCounter == 12:
+                print(
+                    "You have failed to guess the secret code correctly. The mastermind wins.")
+
+        indexRounds = indexRounds + 1
+        attemptCounter = attemptCounter + 1
+
+    def guessFeedback(self, playerAttempt, secretCodeList, indexRounds, attemptCounter):
         blackFeedback = []
         whiteFeedback = []
         indexSecretCode = 0
-        attemptCounter = 1
         '''Goes through the guess and generates feedback on whether it's correct or not'''
         playerAttemptList = list(playerAttempt)
         for x in playerAttemptList:
@@ -312,22 +325,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
 
         blackFeedback.clear()
         whiteFeedback.clear()
-
-        '''Checks if win conditions are valid'''
-        if feedback == ['B', 'B', 'B', 'B']:
-            indexRounds = 12
-            print("Congratulations! You broke the code in ",
-                  attemptCounter, " attempts.")
-
-        elif feedback != ['B', 'B', 'B', 'B'] and attemptCounter == 12:
-            print(
-                "You have failed to guess the secret code correctly. The mastermind wins.")
-
-        indexRounds = indexRounds + 1
-        attemptCounter = attemptCounter + 1
-
-    indexRounds = 0
-    attemptCounter = 1
+        return feedback
 
 
 m = MainMenu()
