@@ -92,10 +92,10 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
         self.player2 = input("Player 2: what is your name?")
 
-        MastermindTwoPlayer.generateShieldCode(self, self.player1)
+        self.generateShieldCode()
 
     '''Method to generate the secret shield code'''
-    def generateShieldCode(self, player1):
+    def generateShieldCode(self):
 
         print("Welcome ", self.player1,", you need to create a code that consists of four pegs.")
         print("Each peg can be of the colour (R)ed, B(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack.")
@@ -131,7 +131,7 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
         indexRounds = 0
 
-        MastermindTwoPlayer.guess(self, self.player2, secretCodeList, indexRounds)
+        self.guess(self.player2, secretCodeList, indexRounds)
 
     '''Takes the players a players guess and verifies it'''
     def guess(self, player2, secretCodeList, indexRounds):
@@ -223,7 +223,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
     def getName(self):
         self.player1 = input("Player 1: What is your name?")
 
-        MastermindOnePlayer.generateShieldCode(self)
+        self.generateShieldCode()
 
     '''Method that uses random and ascii_letters to create a random code while making sure that the
     letters used are valid colours'''
@@ -242,7 +242,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
             index = index + 1
             holdingShieldCode = ""
         indexRounds = 0
-        MastermindOnePlayer.guess(self, self.player1, self.secretCodeList, indexRounds)
+        self.guess(self.player1, self.secretCodeList, indexRounds)
 
     '''Method o take a players guesses and give them feedback'''
     def guess(self, player1, secretCodeList, indexRounds):
@@ -271,7 +271,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
                 if x not in ['r', 'l', 'g', 'y', 'w', 'b']:
                     print("Characters can only be R, L, G, Y, W or B")
                     playerAttempt = input("Give me Input")
-            feedback = MastermindTwoPlayer.guessFeedback(self, playerAttempt, secretCodeList, indexRounds, attemptCounter)
+            feedback = self.guessFeedback(playerAttempt, secretCodeList, indexRounds, attemptCounter)
 
             '''Checks if win conditions are valid'''
             if feedback == ['B', 'B', 'B', 'B']:
@@ -353,11 +353,19 @@ class Mastermind44(supermastermind, codeShield):
     def playerCodeAssign(self):
         takenposition = []
 
+        print("Welcome to Mastermind44! The computer will create the secret code and reveal")
+        print("four of the five positions one-by-one individually to each player. During")
+        print("revealing each position only the requested player should look at the screen.")
+        print("(R)ed, b(L)ue, (G)reen, (Y)ellow, (W)hite, or (B)lack")
         positionHoldingVariable = random.randint(0, 4)
         takenposition.append(positionHoldingVariable)
         self.player1Code = self.secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player1Position = positionHoldingVariable
+        print("Player ", self.player1, ": When you are ready for one position of the code to be revealed")
+        print("on the screen press <enter>")
+        randomEnterVariable = input("")
+        print("Position: ", self.player1Position, "Colour: ", self.player1Code)
 
         positionHoldingVariable = random.randint(0, 4)
         while positionHoldingVariable in takenposition:
@@ -365,6 +373,10 @@ class Mastermind44(supermastermind, codeShield):
         self.player2Code = self.secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player2Position = positionHoldingVariable
+        print("Player ", self.player2, ": When you are ready for one position of the code to be revealed")
+        print("on the screen press <enter>")
+        randomEnterVariable = input("")
+        print("Position: ", self.player2Position, "Colour: ", self.player2Code)
 
         positionHoldingVariable = random.randint(0, 4)
         while positionHoldingVariable in takenposition:
@@ -372,6 +384,10 @@ class Mastermind44(supermastermind, codeShield):
         self.player3Code = self.secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player3Position = positionHoldingVariable
+        print("Player ", self.player3, ": When you are ready for one position of the code to be revealed")
+        print("on the screen press <enter>")
+        randomEnterVariable = input("")
+        print("Position: ", self.player3Position, "Colour: ", self.player3Code)
 
         positionHoldingVariable = random.randint(0, 4)
         while positionHoldingVariable in takenposition:
@@ -379,9 +395,16 @@ class Mastermind44(supermastermind, codeShield):
         self.player4Code = self.secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player4Position = positionHoldingVariable
+        print("Player ", self.player4, ": When you are ready for one position of the code to be revealed")
+        print("on the screen press <enter>")
+        randomEnterVariable = input("")
+        print("Position: ", self.player4Position, "Colour: ", self.player4Code)
 
     def guess(self):
-        pass
+        print("Each player can now start to guess the code.")
+        while index > rounds:
+            pass
+
 
 m = MainMenu()
 
