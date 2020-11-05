@@ -62,13 +62,14 @@ class supermastermind(ABC):
         pass
     '''An abstract method for gametypes to inherit from where they can do their guesses and feedback'''
     @abstractmethod
-    def guessAndFeedback(self):
+    def guess(self):
         pass
 
+    @abstractmethod
+    def guessFeedback(self):
+        pass
 
 '''Abstract class for gamemodes to inherit shield code generation from'''
-
-
 class codeShield(ABC):
 
     '''Abstract method for shieldcode generation to be inherited'''
@@ -87,7 +88,6 @@ class MastermindTwoPlayer(supermastermind, codeShield):
         self.indexRounds = indexRounds
 
     '''Method to get the name of the current players'''
-
     def getName(self):
         self.player1 = input("Player 1: What is your name?")
 
@@ -96,11 +96,9 @@ class MastermindTwoPlayer(supermastermind, codeShield):
         MastermindTwoPlayer.generateShieldCode(self, self.player1)
 
     '''Method to generate the secret shield code'''
-
     def generateShieldCode(self, player1):
 
-        print("Welcome ", self.player1,
-              ", you need to create a code that consists of four pegs.")
+        print("Welcome ", self.player1,", you need to create a code that consists of four pegs.")
         print("Each peg can be of the colour (R)ed, B(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack.")
         print("Specify the colour by specifying four characters where each character indicates a colour")
         print("as above. For example, WWRG represents the code Whie-White-Red-Green. You need to enter")
@@ -136,8 +134,7 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
         MastermindTwoPlayer.guess(self, self.player2, secretCodeList, indexRounds)
 
-    '''Method to take a players guesses and give them feedback'''
-
+    '''Takes the players a players guess and verifies it'''
     def guess(self, player2, secretCodeList, indexRounds):
         feedback = []
         rounds = 12
@@ -180,6 +177,7 @@ class MastermindTwoPlayer(supermastermind, codeShield):
         indexRounds = indexRounds + 1
         attemptCounter = attemptCounter + 1
 
+    '''Checks the player's guess and gives feedback'''
     def guessFeedback(self, playerAttempt, secretCodeList, indexRounds, attemptCounter):
         blackFeedback = []
         whiteFeedback = []
@@ -213,7 +211,6 @@ class MastermindTwoPlayer(supermastermind, codeShield):
         blackFeedback.clear()
         whiteFeedback.clear()
         return feedback
-
 
 '''Inherited class for singleplayer original Mastermind against computer'''
 class MastermindOnePlayer(supermastermind, codeShield):
@@ -251,7 +248,6 @@ class MastermindOnePlayer(supermastermind, codeShield):
         MastermindOnePlayer.guess(self, self.player1, self.secretCodeList, indexRounds)
 
     '''Method o take a players guesses and give them feedback'''
-
     def guess(self, player1, secretCodeList, indexRounds):
         feedback = []
         rounds = 12
@@ -326,6 +322,38 @@ class MastermindOnePlayer(supermastermind, codeShield):
         blackFeedback.clear()
         whiteFeedback.clear()
         return feedback
+
+'''Class for playing Mastermind44'''
+class Mastermind44(supermastermind, codeShield):
+    '''Takes player names as input and assigns to variable'''
+    def getName(self):
+        self.player1 = input("Player 1: What is your name?")
+        self.player2 = input("Player 2: What is your name?")
+        self.player3 = input("Player 3: What is your name?")
+        self.player4 = input("Player 4: What is your name?")
+
+    def generateShieldCode(self):
+        asciiNumberCode = string.ascii_letters
+        self.secretCodeList = []
+        index = 0
+
+        while index < 5:
+            holdingShieldCode = random.choice(asciiNumberCode)
+            while holdingShieldCode != "r" and holdingShieldCode != "l" and holdingShieldCode != "g" and holdingShieldCode != "y" and holdingShieldCode != "w" and holdingShieldCode != "b":
+                holdingShieldCode = ""
+                holdingShieldCode = random.choice(asciiNumberCode)
+
+            self.secretCodeList.append(holdingShieldCode)
+            index = index + 1
+            holdingShieldCode = ""
+        print(self.secretCodeList)
+        indexRounds = 0
+
+    def playerCodeAssign(self, player1, player2, player3, player4):
+        print("Welcome to Mastermind 44! The computer will create the secret code and reveal")
+        print("four of the five positions one-by-one individually to each player. During")
+        print("revealing each position, only the requested player should look at the screen")
+        print("(R)ed, b(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack")
 
 
 m = MainMenu()
