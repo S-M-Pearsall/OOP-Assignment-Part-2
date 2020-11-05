@@ -37,11 +37,10 @@ class MainMenu:
 
             MastermindOnePlayer.getName(self)
 
-            pass
 
         elif gametype == "c":
-            # Mastermind44()
-            pass
+            Mastermind44.getName(self)
+            
 
         MainMenu.continuePlaying(self)
 
@@ -231,7 +230,6 @@ class MastermindOnePlayer(supermastermind, codeShield):
 
     def generateShieldCode(self):
         asciiNumberCode = string.ascii_letters
-        self.secretCodeList = []
         index = 0
 
         while index < 4:
@@ -243,7 +241,6 @@ class MastermindOnePlayer(supermastermind, codeShield):
             self.secretCodeList.append(holdingShieldCode)
             index = index + 1
             holdingShieldCode = ""
-        print(self.secretCodeList)
         indexRounds = 0
         MastermindOnePlayer.guess(self, self.player1, self.secretCodeList, indexRounds)
 
@@ -332,10 +329,14 @@ class Mastermind44(supermastermind, codeShield):
         self.player3 = input("Player 3: What is your name?")
         self.player4 = input("Player 4: What is your name?")
 
+    '''Generates a random code and assigns one position and element to each mastermind'''
     def generateShieldCode(self):
         asciiNumberCode = string.ascii_letters
         self.secretCodeList = []
         index = 0
+        choosingMastermind = 0
+        mastermindPosition = []
+        takenposition = []
 
         while index < 5:
             holdingShieldCode = random.choice(asciiNumberCode)
@@ -346,15 +347,41 @@ class Mastermind44(supermastermind, codeShield):
             self.secretCodeList.append(holdingShieldCode)
             index = index + 1
             holdingShieldCode = ""
-        print(self.secretCodeList)
+
         indexRounds = 0
 
-    def playerCodeAssign(self, player1, player2, player3, player4):
-        print("Welcome to Mastermind 44! The computer will create the secret code and reveal")
-        print("four of the five positions one-by-one individually to each player. During")
-        print("revealing each position, only the requested player should look at the screen")
-        print("(R)ed, b(L)ue, (G)reen, (Y)ellow, (W)hite or (B)lack")
+    def playerCodeAssign(self):
+        takenposition = []
 
+        positionHoldingVariable = random.randint(0, 4)
+        takenposition.append(positionHoldingVariable)
+        self.player1Code = self.secretCodeList[positionHoldingVariable]
+        positionHoldingVariable = positionHoldingVariable + 1
+        self.player1Position = positionHoldingVariable
+
+        positionHoldingVariable = random.randint(0, 4)
+        while positionHoldingVariable in takenposition:
+            positionHoldingVariable = random.randint(0, 4)
+        self.player2Code = self.secretCodeList[positionHoldingVariable]
+        positionHoldingVariable = positionHoldingVariable + 1
+        self.player2Position = positionHoldingVariable
+
+        positionHoldingVariable = random.randint(0, 4)
+        while positionHoldingVariable in takenposition:
+            positionHoldingVariable = random.randint(0, 4)
+        self.player3Code = self.secretCodeList[positionHoldingVariable]
+        positionHoldingVariable = positionHoldingVariable + 1
+        self.player3Position = positionHoldingVariable
+
+        positionHoldingVariable = random.randint(0, 4)
+        while positionHoldingVariable in takenposition:
+            positionHoldingVariable = random.randint(0, 4)
+        self.player4Code = self.secretCodeList[positionHoldingVariable]
+        positionHoldingVariable = positionHoldingVariable + 1
+        self.player4Position = positionHoldingVariable
+
+    def guess(self):
+        pass
 
 m = MainMenu()
 
