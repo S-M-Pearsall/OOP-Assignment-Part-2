@@ -261,6 +261,7 @@ class MastermindOnePlayer(supermastermind, codeShield):
     def __init__(self, player1):
         self.secretCode = ""
         self.secretCodeList = []
+        self.player1 = player1
 
     '''Method that uses random and ascii_letters to create a random code while making sure that the
     letters used are valid colours'''
