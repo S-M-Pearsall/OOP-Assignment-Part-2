@@ -97,7 +97,7 @@ class MainMenu:
     def continuePlaying(self):
         print("What would you like to do?")
         willYouPlay = input("(p)lay the game again\n(q)uit")
-        if willYouPlay == "p":
+        if willYouPlay == "p" or willYouPlay == "P":
             MainMenu.play(self)
 
 
