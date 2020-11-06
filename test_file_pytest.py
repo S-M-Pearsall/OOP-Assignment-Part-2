@@ -1,6 +1,11 @@
 import pytest
 from Assignment2Mastermind import *
 
+#While the code seems solid, pytest gives me an error that I could not figure out how to fix.
+#I know it has something to do with the inputs but I'm not sure what to do.
+#In your feedback could you explain the error and how to fix it "in detail"
+#So I can learn from this mistake?
+
 '''Class to test mastermind one player'''
 class test_Mastermind_One_Player:
 
