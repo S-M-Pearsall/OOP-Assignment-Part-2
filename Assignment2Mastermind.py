@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 import random
 import string
-import unittest
+import pytest
+import os
+import getpass
 
 ''' Class to run the main menu where player chooses their gamemode'''
 class MainMenu:
@@ -21,7 +23,7 @@ class MainMenu:
 
         '''Takes the input and compares it. If it is a valid input it launches that gametype.
         Otherwise it tells the user that it is invalid and tells them to redo it.'''
-        if gametype != "a" and gametype != "b" and gametype != "c":
+        if gametype not in ['a', 'A', 'b', 'B', 'c', 'C']:
 
             print("Error, invalid input, please retry, you can either choose A, B or C")
             gametype = input("*Enter A, B, or C to continue*")
@@ -29,6 +31,8 @@ class MainMenu:
         ''' These if statements check what gametype is selected and proceed
         to play out the game that has been selected'''
         if gametype == "a" or gametype == "A":
+
+            assert gametype in ['a', 'A']
 
             player1 = input("Player 1: what is your name? ")
             player2 = input("Player 2: what is your name? ")
@@ -48,8 +52,10 @@ class MainMenu:
             game.guess(player2, secretCodeList)
 
 
-        elif gametype == "b":
-            
+        elif gametype == "b" or gametype == "B":
+
+            assert gametype in ['b', 'B'] 
+
             player1 = input("Player 1: what is your name? ")
 
             game = MastermindOnePlayer(player1)
@@ -62,7 +68,9 @@ class MainMenu:
             game.guess(player1, secretCodeList)
 
 
-        elif gametype == "c":
+        elif gametype == "c" or gametype == "C":
+            
+            assert gametype in ['c', 'C']
 
             player1 = input("Player 1: What is your name?")
             player2 = input("Player 2: What is your name?")
@@ -78,7 +86,7 @@ class MainMenu:
 
             secretCodeList = game.generateShieldCode()
 
-            game.playerCodeAssign()
+            game.playerCodeAssign(secretCodeList)
 
             game.guess(secretCodeList)
             
@@ -124,18 +132,18 @@ class MastermindTwoPlayer(supermastermind, codeShield):
 
     '''Method to generate the secret shield code'''
     def generateShieldCode(self):
-        secretCode = input("Enter the code now:")
+        secretCode = getpass.getpass("Enter the code now:")
 
-        confirmSecretCode = input("Enter the code again:")
+        confirmSecretCode = getpass.getpass("Enter the code again:")
 
         '''While statement to check if the two codes match'''
         while confirmSecretCode != secretCode:
 
             print("Error, please re-enter the code twice")
 
-            secretCode = input("Enter the code now:")
+            secretCode = getpass.getpass("Enter the code now:")
 
-            confirmSecretCode = input("Enter the code again:")
+            confirmSecretCode = getpass.getpass("Enter the code again:")
 
         '''Makes sure the secret code only contains valid characters'''
         for x in secretCode:
@@ -390,15 +398,14 @@ class Mastermind44(supermastermind, codeShield):
         return secretCodeList
 
     '''Method that assigns a position and its current element's code to each player'''
-    def playerCodeAssign(self):
+    def playerCodeAssign(self, secretCodeList):
         takenposition = []
-
         '''Checks both position and element. Assigns an element not taken to each mastermind.'''
         '''Then adds 1 and puts that as the players position so they know where they are'''
         positionHoldingVariable = random.randint(0, 4)
         takenposition.append(positionHoldingVariable)
 
-        self.player1Code = self.secretCodeList[positionHoldingVariable]
+        self.player1Code = secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player1Position = positionHoldingVariable
 
@@ -407,13 +414,14 @@ class Mastermind44(supermastermind, codeShield):
         randomEnterVariable = input("")
 
         print("Position: ", self.player1Position, "Colour: ", self.player1Code)
-
+        randomEnterVariable = input("Clear screen on <enter>")
+        os.system('cls')
         positionHoldingVariable = random.randint(0, 4)
 
         while positionHoldingVariable in takenposition:
             positionHoldingVariable = random.randint(0, 4)
 
-        self.player2Code = self.secretCodeList[positionHoldingVariable]
+        self.player2Code = secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player2Position = positionHoldingVariable
 
@@ -428,7 +436,7 @@ class Mastermind44(supermastermind, codeShield):
         while positionHoldingVariable in takenposition:
             positionHoldingVariable = random.randint(0, 4)
 
-        self.player3Code = self.secretCodeList[positionHoldingVariable]
+        self.player3Code = secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player3Position = positionHoldingVariable
 
@@ -442,7 +450,7 @@ class Mastermind44(supermastermind, codeShield):
         while positionHoldingVariable in takenposition:
             positionHoldingVariable = random.randint(0, 4)
 
-        self.player4Code = self.secretCodeList[positionHoldingVariable]
+        self.player4Code = secretCodeList[positionHoldingVariable]
         positionHoldingVariable = positionHoldingVariable + 1
         self.player4Position = positionHoldingVariable
 
@@ -467,7 +475,7 @@ class Mastermind44(supermastermind, codeShield):
         while index < rounds:
             print(self.player1, "Attempt #", attemptCounter, ": Enter five colours using (R)ed, b(L)ue, (G)reen,")
             print("(Y)ellow, (W)hite or (B)lack: ")
-            playerattempt = input("Give me input")
+            playerAttempt = input("Give me input")
 
             '''Checks validity of the guess length'''
             if len(playerAttempt) != 5:
@@ -495,7 +503,7 @@ class Mastermind44(supermastermind, codeShield):
 
             print(self.player2, "Attempt #", attemptCounter, ": Enter five colours using (R)ed, b(L)ue, (G)reen,")
             print("(Y)ellow, (W)hite or (B)lack: ")
-            playerattempt = input("Give me input")
+            playerAttempt = input("Give me input")
 
             '''Checks validity of the guess length'''
             if len(playerAttempt) != 5:
@@ -523,7 +531,7 @@ class Mastermind44(supermastermind, codeShield):
 
             print(self.player3, "Attempt #", attemptCounter, ": Enter five colours using (R)ed, b(L)ue, (G)reen,")
             print("(Y)ellow, (W)hite or (B)lack: ")
-            playerattempt = input("Give me input")
+            playerAttempt = input("Give me input")
 
             '''Checks validity of the guess length'''
             if len(playerAttempt) != 5:
@@ -551,7 +559,7 @@ class Mastermind44(supermastermind, codeShield):
 
             print(self.player4, "Attempt #", attemptCounter, ": Enter five colours using (R)ed, b(L)ue, (G)reen,")
             print("(Y)ellow, (W)hite or (B)lack: ")
-            playerattempt = input("Give me input")
+            playerAttempt = input("Give me input")
 
             '''Checks validity of the guess length'''
             if len(playerAttempt) != 5:
